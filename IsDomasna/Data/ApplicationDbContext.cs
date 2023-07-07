@@ -13,7 +13,7 @@ namespace IsDomasna.Data
         {
         }
 
-        public DbSet<Ticket> Tickets { get; set; } // Add DbSet for Ticket model
+        public virtual DbSet<Ticket> Tickets { get; set; } // Add DbSet for Ticket model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

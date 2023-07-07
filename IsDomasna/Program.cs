@@ -1,4 +1,7 @@
 using IsDomasna.Data;
+using IsDomasna.Repository.YourAppName.Data.Repositories;
+using IsDomasna.Repository;
+using IsDomasna.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseInMemoryDatabase("TicketDatabase");
 });
+
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<ITicketService, TicketService>();
+
 
 var app = builder.Build();
 
