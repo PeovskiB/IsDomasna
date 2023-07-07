@@ -1,0 +1,27 @@
+﻿using IsDomasna.Models;
+using System.Collections.Generic;
+using System.Reflection.Emit;
+using Microsoft.EntityFrameworkCore;
+using IsDomasna.Models; // Update with the appropriate namespace for your models
+
+namespace IsDomasna.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Ticket> Tickets { get; set; } // Add DbSet for Ticket model
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            //// Configure the Ticket entity
+            //modelBuilder.Entity<Ticket>()
+            //    .ToTable("Tickets"); // Update table name if needed
+        }
+    }
+}
