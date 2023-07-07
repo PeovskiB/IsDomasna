@@ -9,9 +9,14 @@ namespace IsDomasna.Repository
     {
         private readonly DbSet<Ticket> Tickets;
 
+        private readonly ApplicationDbContext context;
+
 
         public TicketRepository(ApplicationDbContext context)
         {
+
+            this.context = context;
+
             // Initialize placeholder tickets
             Tickets.AddRange(new[]
             {
