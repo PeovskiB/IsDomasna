@@ -17,6 +17,7 @@
             <th>Title</th>
             <th>Price</th>
             <th>Validity Date</th>
+            <th>Actions</th> <!-- New column for Edit and Delete buttons -->
         </tr>
     </thead>
     <tbody>
@@ -26,7 +27,13 @@
                 <td>@ticket.Title</td>
                 <td>@ticket.Price</td>
                 <td>@ticket.ValidityDate.ToShortDateString()</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = ticket.Id })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Delete", new { id = ticket.Id })" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<a href="@Url.Action("Create")" class="btn btn-success">Create New Ticket</a>
