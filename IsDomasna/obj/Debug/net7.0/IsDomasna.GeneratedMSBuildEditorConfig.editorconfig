@@ -16,36 +16,28 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Borjan\Documents\GitHub\IsDomasna\IsDomasna
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Ticket/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0XENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Ticket/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0XERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Ticket/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0XEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Ticket/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0XEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Ticket/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0XExvZ2luLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/Ticket/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0XFByaXZhY3kuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Borjan/Documents/GitHub/IsDomasna/IsDomasna/Views/_ViewImports.cshtml]

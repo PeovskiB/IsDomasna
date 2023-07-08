@@ -46,25 +46,25 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.7, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.8, )"
+              "version": "[7.0.7, )"
             },
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[7.0.8, )"
+              "version": "[7.0.7, )"
             },
-            "Microsoft.EntityFrameworkCore.InMemory": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.8, )"
+              "version": "[7.0.7, )"
             },
-            "Microsoft.EntityFrameworkCore.Relational": {
+            "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
-              "version": "[7.0.8, )"
-            },
-            "Microsoft.Extensions.DependencyInjection": {
-              "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.7, )"
             }
           },
           "imports": [

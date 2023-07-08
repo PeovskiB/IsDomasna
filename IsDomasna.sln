@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.6.33723.286
+VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IsDomasna", "IsDomasna\IsDomasna.csproj", "{D3553360-70C3-4741-AD3D-A2C70E0402EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsDomasna", "IsDomasna\IsDomasna.csproj", "{2F754678-18C7-48D6-8579-8062016FFA67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D3553360-70C3-4741-AD3D-A2C70E0402EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3553360-70C3-4741-AD3D-A2C70E0402EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3553360-70C3-4741-AD3D-A2C70E0402EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3553360-70C3-4741-AD3D-A2C70E0402EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F754678-18C7-48D6-8579-8062016FFA67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F754678-18C7-48D6-8579-8062016FFA67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F754678-18C7-48D6-8579-8062016FFA67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F754678-18C7-48D6-8579-8062016FFA67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9F3F3353-73EE-44F6-8289-B73CC67817AF}
+		SolutionGuid = {1936AFEA-0B63-4B03-A6D2-63E66514EDE0}
 	EndGlobalSection
 EndGlobal

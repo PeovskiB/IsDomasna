@@ -1,43 +1,27 @@
 using IsDomasna.Data;
-using IsDomasna.Repository.YourAppName.Data.Repositories;
-using IsDomasna.Repository;
-using IsDomasna.Service;
-using Microsoft.EntityFrameworkCore;
-using IsDomasna.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseInMemoryDatabase("TicketDatabase");
-});
+    options.UseSqlServer(connectionString));
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-//builder.Services.AddIdentity<CinemaUser, IdentityRole>(options =>
-//{
-
-//});
-
-builder.Services.AddIdentity<CinemaUser, IdentityRole>().AddEntityFrameworkStores < ApplicationDbContext>().AddDefaultTokenProviders();
-
-builder.Services.AddScoped<ITicketRepository, TicketRepository>();
-builder.Services.AddScoped<ITicketService, TicketService>();
-
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("ElevatedRights", policy =>
-          policy.RequireRole("Administrator"));
-});
-
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseMigrationsEndPoint();
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -49,11 +33,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Ticket}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
 
 app.Run();
