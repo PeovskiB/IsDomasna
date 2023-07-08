@@ -3,6 +3,8 @@ using IsDomasna.Repository.YourAppName.Data.Repositories;
 using IsDomasna.Repository;
 using IsDomasna.Service;
 using Microsoft.EntityFrameworkCore;
+using IsDomasna.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +16,22 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseInMemoryDatabase("TicketDatabase");
 });
 
+//builder.Services.AddIdentity<CinemaUser, IdentityRole>(options =>
+//{
+
+//});
+
+builder.Services.AddIdentity<CinemaUser, IdentityRole>().AddEntityFrameworkStores < ApplicationDbContext>().AddDefaultTokenProviders();
+
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<ITicketService, TicketService>();
+
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ElevatedRights", policy =>
+          policy.RequireRole("Administrator"));
+});
 
 
 var app = builder.Build();
@@ -33,6 +49,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

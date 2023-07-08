@@ -2,7 +2,7 @@
 
 namespace IsDomasna.Models
 {
-    public class TicketUser : IdentityUser
+    public class CinemaUser : IdentityUser
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

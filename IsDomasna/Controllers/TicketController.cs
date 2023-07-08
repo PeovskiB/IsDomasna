@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using IsDomasna.Models; // Update with the appropriate namespace for your models
 using IsDomasna.Data; // Update with the appropriate namespace for your data context
+using Microsoft.AspNetCore.Authorization;
 
 namespace YourAppName.Controllers
 {
@@ -16,6 +17,7 @@ namespace YourAppName.Controllers
         }
 
         // GET: /
+        [Authorize]
         public IActionResult Index(DateTime? validityDate)
         {
             var tickets = _context.Tickets.AsQueryable();

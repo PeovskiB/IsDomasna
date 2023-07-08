@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Reflection.Emit;
 using Microsoft.EntityFrameworkCore;
 using IsDomasna.Models; // Update with the appropriate namespace for your models
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace IsDomasna.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<CinemaUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
