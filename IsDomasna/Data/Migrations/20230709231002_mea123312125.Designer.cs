@@ -4,6 +4,7 @@ using IsDomasna.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IsDomasna.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230709231002_mea123312125")]
+    partial class mea123312125
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +31,6 @@ namespace IsDomasna.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CartId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -79,7 +79,7 @@ namespace IsDomasna.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ShoppingCartCartId")
+                    b.Property<int>("ShoppingCartId")
                         .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -99,23 +99,23 @@ namespace IsDomasna.Data.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("ShoppingCartCartId");
+                    b.HasIndex("ShoppingCartId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("IsDomasna.Models.ShoppingCart", b =>
                 {
-                    b.Property<int>("CartId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CartId");
+                    b.HasKey("Id");
 
                     b.ToTable("ShoppingCart");
                 });
@@ -134,7 +134,7 @@ namespace IsDomasna.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ShoppingCartCartId")
+                    b.Property<int?>("ShoppingCartId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -146,7 +146,7 @@ namespace IsDomasna.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShoppingCartCartId");
+                    b.HasIndex("ShoppingCartId");
 
                     b.ToTable("Tickets", (string)null);
                 });
@@ -292,7 +292,7 @@ namespace IsDomasna.Data.Migrations
                 {
                     b.HasOne("IsDomasna.Models.ShoppingCart", "ShoppingCart")
                         .WithMany()
-                        .HasForeignKey("ShoppingCartCartId")
+                        .HasForeignKey("ShoppingCartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -303,7 +303,7 @@ namespace IsDomasna.Data.Migrations
                 {
                     b.HasOne("IsDomasna.Models.ShoppingCart", null)
                         .WithMany("Tickets")
-                        .HasForeignKey("ShoppingCartCartId");
+                        .HasForeignKey("ShoppingCartId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

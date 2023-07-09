@@ -5,16 +5,20 @@ using IsDomasna.Models; // Update with the appropriate namespace for your models
 using IsDomasna.Data; // Update with the appropriate namespace for your data context
 using Microsoft.AspNetCore.Authorization;
 using OfficeOpenXml;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace YourAppName.Controllers
 {
     public class TicketController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<CinemaUser> _userManager;
 
-        public TicketController(ApplicationDbContext context)
+        public TicketController(ApplicationDbContext context, UserManager<CinemaUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: /
@@ -167,6 +171,27 @@ namespace YourAppName.Controllers
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
             }
         }
+
+        public async Task<IActionResult> AddToCart(int ticketId)
+        {
+            var ticket = await _context.Tickets.FindAsync(ticketId);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            user.ShoppingCart.Tickets.Add(ticket);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Cart");
+        }
+
 
     }
 }
