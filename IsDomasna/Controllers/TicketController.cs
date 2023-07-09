@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using IsDomasna.Models; // Update with the appropriate namespace for your models
 using IsDomasna.Data; // Update with the appropriate namespace for your data context
 using Microsoft.AspNetCore.Authorization;
+using OfficeOpenXml;
 
 namespace YourAppName.Controllers
 {
@@ -120,5 +121,50 @@ namespace YourAppName.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        // GET: /Export
+        public IActionResult Export(string genre)
+        {
+            var tickets = _context.Tickets.ToList();
+
+            // Filter the tickets based on the selected genre
+            if (!string.IsNullOrEmpty(genre))
+            {
+                tickets = tickets.Where(t => t.Genre == genre).ToList();
+            }
+
+            // Create a new Excel package
+            using (var package = new ExcelPackage())
+            {
+                // Add a new worksheet
+                var worksheet = package.Workbook.Worksheets.Add("Tickets");
+
+                // Set the header row
+                worksheet.Cells[1, 1].Value = "Title";
+                worksheet.Cells[1, 2].Value = "Price";
+                worksheet.Cells[1, 3].Value = "Validity Date";
+
+                // Populate the data rows
+                for (int i = 0; i < tickets.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1].Value = tickets[i].Title;
+                    worksheet.Cells[i + 2, 2].Value = tickets[i].Price;
+                    worksheet.Cells[i + 2, 3].Value = tickets[i].ValidityDate.ToShortDateString();
+                }
+
+                // Auto-fit the columns
+                worksheet.Cells.AutoFitColumns();
+
+                // Generate a unique filename for the Excel file
+                var fileName = $"Tickets_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xlsx";
+
+                // Save the Excel file to a stream
+                var stream = new MemoryStream(package.GetAsByteArray());
+
+                // Return the file as a response
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            }
+        }
+
     }
 }

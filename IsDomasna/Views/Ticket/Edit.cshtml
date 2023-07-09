@@ -24,6 +24,12 @@
         @Html.ValidationMessageFor(model => model.ValidityDate, "", new { @class = "text-danger" })
     </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.Genre)
+        @Html.TextBoxFor(model => model.Genre, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })
+    </div>
+
     <button type="submit" class="btn btn-primary">Save</button>
 }
 

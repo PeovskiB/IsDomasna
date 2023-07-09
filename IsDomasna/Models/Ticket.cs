@@ -17,6 +17,8 @@ namespace IsDomasna.Models
         [Display(Name = "Validity Date")]
         [DataType(DataType.Date)]
         public DateTime ValidityDate { get; set; }
+
+        public string? Genre { get; set; }
     }
 
 }

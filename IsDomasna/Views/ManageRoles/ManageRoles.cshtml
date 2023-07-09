@@ -1,0 +1,40 @@
+﻿@page "/ManageRoles"
+@model IsDomasna.Pages.ManageRolesController
+@{
+    ViewData["Title"] = "Manage Roles";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.Users != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Role</td>
+                    <td>
+                        <form asp-page-handler="AssignRole" method="post">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <select name="roleName" class="form-control">
+                                <option value="">Select Role</option>
+                                <option value="Admin">Admin</option>
+                                <option value="User">User</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Assign Role</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
