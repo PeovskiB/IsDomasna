@@ -1,0 +1,39 @@
+﻿@model IEnumerable<IsDomasna.Models.Ticket>  // Update with the appropriate namespace for your Ticket model
+
+<h2>Ticket Listing</h2>
+
+@using (Html.BeginForm("Index", "Ticket", FormMethod.Get))
+{
+    <div class="form-group">
+        <label for="validityDate">Validity Date:</label>
+        <input type="date" name="validityDate" id="validityDate" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Apply Filter</button>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Validity Date</th>
+            <th>Actions</th> <!-- New column for Edit and Delete buttons -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model)
+        {
+            <tr>
+                <td>@ticket.Title</td>
+                <td>@ticket.Price</td>
+                <td>@ticket.ValidityDate.ToShortDateString()</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = ticket.Id })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Delete", new { id = ticket.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Create")" class="btn btn-success">Create New Ticket</a>

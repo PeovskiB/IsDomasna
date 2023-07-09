@@ -1,0 +1,23 @@
+﻿@*@model IsDomasna.Models.CinemaUser  // update with the appropriate namespace for your cinemauser model
+
+<h2>login</h2>
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email)
+        @Html.TextAreaFor(model => model.Email, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password)
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">login</button>
+}
+
+<p>
+    don't have an account? <a href="@Url.Action("Register", "Account")">register</a>
+</p>
+*@
