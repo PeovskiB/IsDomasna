@@ -143,6 +143,7 @@ namespace YourAppName.Controllers
                 worksheet.Cells[1, 1].Value = "Title";
                 worksheet.Cells[1, 2].Value = "Price";
                 worksheet.Cells[1, 3].Value = "Validity Date";
+                worksheet.Cells[1, 4].Value = "Genre";
 
                 // Populate the data rows
                 for (int i = 0; i < tickets.Count; i++)
@@ -150,6 +151,7 @@ namespace YourAppName.Controllers
                     worksheet.Cells[i + 2, 1].Value = tickets[i].Title;
                     worksheet.Cells[i + 2, 2].Value = tickets[i].Price;
                     worksheet.Cells[i + 2, 3].Value = tickets[i].ValidityDate.ToShortDateString();
+                    worksheet.Cells[i + 2, 4].Value = tickets[i].Genre;
                 }
 
                 // Auto-fit the columns

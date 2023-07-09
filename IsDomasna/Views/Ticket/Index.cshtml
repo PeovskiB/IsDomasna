@@ -11,7 +11,21 @@
     <button type="submit" class="btn btn-primary">Apply Filter</button>
 }
 
-<a href="@Url.Action("Export", "Ticket")" class="btn btn-primary">Export Tickets</a>
+@*<a href="@Url.Action("Export", "Ticket")" class="btn btn-primary">Export Tickets</a>*@
+
+<form method="get" action="@Url.Action("Export", "Ticket")">
+    <div class="form-group">
+        <label for="genre">Genre:</label>
+        <select name="genre" id="genre" class="form-control">
+            <option value="">All</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <!-- Add more genre options as needed -->
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Export Tickets</button>
+</form>
 
 
 <table class="table">
@@ -20,6 +34,7 @@
             <th>Title</th>
             <th>Price</th>
             <th>Validity Date</th>
+            <th>Genre</th>
             <th>Actions</th> <!-- New column for Edit and Delete buttons -->
         </tr>
     </thead>
@@ -30,6 +45,7 @@
                 <td>@ticket.Title</td>
                 <td>@ticket.Price</td>
                 <td>@ticket.ValidityDate.ToShortDateString()</td>
+                <td>@ticket.Genre</td>
                 <td>
                     <a href="@Url.Action("Edit", new { id = ticket.Id })" class="btn btn-primary">Edit</a>
                     <a href="@Url.Action("Delete", new { id = ticket.Id })" class="btn btn-danger">Delete</a>
