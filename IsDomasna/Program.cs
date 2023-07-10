@@ -1,10 +1,12 @@
-using IsDomasna.Data;
 using IsDomasna.Repository.YourAppName.Data.Repositories;
-using IsDomasna.Repository;
-using IsDomasna.Service;
 using Microsoft.EntityFrameworkCore;
-using IsDomasna.Models;
 using Microsoft.AspNetCore.Identity;
+using IsDomasna.IsDomasna.Service.Service;
+using IsDomasna.IsDomasna.Domain.Models;
+using IsDomasna.IsDomasna.Repository.Repository;
+using IsDomasna.IsDomasna.Repository.Data;
+using Microsoft.EntityFrameworkCore.InMemory;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

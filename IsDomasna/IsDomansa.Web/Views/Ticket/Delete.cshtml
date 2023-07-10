@@ -1,0 +1,28 @@
+﻿@model IsDomasna.IsDomasna.Domain.Models.Ticket  // Update with the appropriate namespace for your Ticket model
+
+<h2>Delete Ticket</h2>
+
+<p>Are you sure you want to delete the following ticket?</p>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <td>@Model.Title</td>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <td>@Model.Price</td>
+    </tr>
+    <tr>
+        <th>Validity Date</th>
+        <td>@Model.ValidityDate.ToShortDateString()</td>
+    </tr>
+</table>
+
+@using (Html.BeginForm("Delete", "Ticket", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id)
+    <button type="submit" class="btn btn-danger">Delete</button>
+}
+
+<a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
