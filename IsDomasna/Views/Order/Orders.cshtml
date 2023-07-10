@@ -1,0 +1,39 @@
+﻿@model List<IsDomasna.Models.Order>
+
+<h1>Orders</h1>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Order Date</th>
+                <th>Order Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.UserId</td>
+                    <td>@order.OrderDate</td>
+                    <td>
+                        <ul>
+                            @foreach (var item in order.OrderItems)
+                            {
+                                <li>@item.Ticket.Title</li>
+                            }
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No orders available.</p>
+}

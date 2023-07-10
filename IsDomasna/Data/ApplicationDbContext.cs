@@ -17,6 +17,8 @@ namespace IsDomasna.Data
         public virtual DbSet<Ticket> Tickets { get; set; } // Add DbSet for Ticket model
         public virtual DbSet<ShoppingCart> Carts { get; set; }
         public virtual DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,6 +48,18 @@ namespace IsDomasna.Data
                 .WithMany(t => t.ShoppingCartItems)
                 .HasForeignKey(i => i.TicketId);
 
+            modelBuilder.Entity<OrderItem>()
+               .HasKey(i => new { i.OrderItemId, i.OrderId, i.TicketId });
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(i => i.Order)
+                .WithMany(o => o.OrderItems)
+                .HasForeignKey(i => i.OrderId);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(i => i.Ticket)
+                .WithMany()
+                .HasForeignKey(i => i.TicketId);
 
         }
     }

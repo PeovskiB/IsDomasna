@@ -1,0 +1,40 @@
+﻿@model IsDomasna.Models.Order
+
+<h1>Create Order</h1>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="UserId">User Id:</label>
+        <input asp-for="UserId" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OrderDate">Order Date:</label>
+        <input asp-for="OrderDate" class="form-control" readonly />
+    </div>
+
+    <h3>Order Items:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Validity Date</th>
+                <th>Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Ticket.Title</td>
+                    <td>@item.Ticket.Price</td>
+                    <td>@item.Ticket.ValidityDate.ToShortDateString()</td>
+                    <td>@item.Ticket.Genre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Place Order</button>
+</form>
