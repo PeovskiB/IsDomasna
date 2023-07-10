@@ -207,20 +207,19 @@ namespace YourAppName.Controllers
         [Authorize]
         public IActionResult Cart(DateTime? validityDate)
         {
-            var cart = GetShoppingCart();
-
-            var tickets = cart.ShoppingCartItems
-                .Select(item => item.Ticket)
-                .AsQueryable();
+            var shoppingCart = GetShoppingCart(); // Retrieve the shopping cart
 
             // Apply the validity date filter if provided
             if (validityDate.HasValue)
             {
-                tickets = tickets.Where(t => t.ValidityDate.Date == validityDate.Value.Date);
+                shoppingCart.ShoppingCartItems = shoppingCart.ShoppingCartItems
+                    .Where(item => item.Ticket.ValidityDate.Date == validityDate.Value.Date)
+                    .ToList();
             }
 
-            return View(tickets.ToList());
+            return View(shoppingCart);
         }
+
 
         private ShoppingCart GetShoppingCart()
         {

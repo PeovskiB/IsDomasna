@@ -35,7 +35,8 @@
             <th>Price</th>
             <th>Validity Date</th>
             <th>Genre</th>
-            <th>Actions</th> <!-- New column for Edit and Delete buttons -->
+            <th>Actions</th>
+            <th></th> <!-- New column for Add to Cart button -->
         </tr>
     </thead>
     <tbody>
@@ -49,6 +50,12 @@
                 <td>
                     <a href="@Url.Action("Edit", new { id = ticket.TicketId })" class="btn btn-primary">Edit</a>
                     <a href="@Url.Action("Delete", new { id = ticket.TicketId })" class="btn btn-danger">Delete</a>
+                </td>
+                <td>
+                    <form method="post" action="@Url.Action("AddToCart", "Ticket")">
+                        <input type="hidden" name="ticketId" value="@ticket.TicketId" />
+                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                    </form>
                 </td>
             </tr>
         }

@@ -8,7 +8,7 @@ namespace IsDomasna.Models
         [Key]
         public int CartId { get; set; }
 
-        public string? UserId { get; set; }
+        public string UserId { get; set; }
 
         public CinemaUser Owner { get; set; }
 
