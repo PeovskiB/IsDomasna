@@ -4,6 +4,7 @@ using IsDomasna.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IsDomasna.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230710174318_fim3142241")]
+    partial class fim3142241
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,6 +82,9 @@ namespace IsDomasna.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ShoppingCartCartId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -96,6 +102,8 @@ namespace IsDomasna.Data.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("ShoppingCartCartId");
+
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
@@ -107,36 +115,12 @@ namespace IsDomasna.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"));
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CartId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("IsDomasna.Models.ShoppingCartItem", b =>
-                {
-                    b.Property<int>("ShoppingCartItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShoppingCartId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TicketId")
                         .HasColumnType("int");
 
-                    b.HasKey("ShoppingCartItemId", "ShoppingCartId", "TicketId");
+                    b.HasKey("CartId");
 
-                    b.HasIndex("ShoppingCartId");
-
-                    b.HasIndex("TicketId");
-
-                    b.ToTable("ShoppingCartItems");
+                    b.ToTable("ShoppingCart");
                 });
 
             modelBuilder.Entity("IsDomasna.Models.Ticket", b =>
@@ -153,6 +137,9 @@ namespace IsDomasna.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("ShoppingCartCartId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -162,7 +149,9 @@ namespace IsDomasna.Data.Migrations
 
                     b.HasKey("TicketId");
 
-                    b.ToTable("Tickets");
+                    b.HasIndex("ShoppingCartCartId");
+
+                    b.ToTable("Tickets", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -302,33 +291,22 @@ namespace IsDomasna.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("IsDomasna.Models.ShoppingCart", b =>
-                {
-                    b.HasOne("IsDomasna.Models.CinemaUser", "Owner")
-                        .WithOne("ShoppingCart")
-                        .HasForeignKey("IsDomasna.Models.ShoppingCart", "UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("IsDomasna.Models.ShoppingCartItem", b =>
+            modelBuilder.Entity("IsDomasna.Models.CinemaUser", b =>
                 {
                     b.HasOne("IsDomasna.Models.ShoppingCart", "ShoppingCart")
-                        .WithMany("ShoppingCartItems")
-                        .HasForeignKey("ShoppingCartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IsDomasna.Models.Ticket", "Ticket")
-                        .WithMany("ShoppingCartItems")
-                        .HasForeignKey("TicketId")
+                        .WithMany()
+                        .HasForeignKey("ShoppingCartCartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ShoppingCart");
+                });
 
-                    b.Navigation("Ticket");
+            modelBuilder.Entity("IsDomasna.Models.Ticket", b =>
+                {
+                    b.HasOne("IsDomasna.Models.ShoppingCart", null)
+                        .WithMany("Tickets")
+                        .HasForeignKey("ShoppingCartCartId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -382,20 +360,9 @@ namespace IsDomasna.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("IsDomasna.Models.CinemaUser", b =>
-                {
-                    b.Navigation("ShoppingCart")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("IsDomasna.Models.ShoppingCart", b =>
                 {
-                    b.Navigation("ShoppingCartItems");
-                });
-
-            modelBuilder.Entity("IsDomasna.Models.Ticket", b =>
-                {
-                    b.Navigation("ShoppingCartItems");
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

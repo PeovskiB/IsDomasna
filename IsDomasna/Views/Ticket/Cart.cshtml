@@ -6,7 +6,7 @@
 
 <h1>@ViewData["Title"]</h1>
 
-@if (Model.Tickets != null && Model.Tickets.Count > 0)
+@if (Model.ShoppingCartItems != null && Model.ShoppingCartItems.Count > 0)
 {
     <table class="table">
         <thead>
@@ -19,16 +19,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Tickets)
+            @foreach (var item in Model.ShoppingCartItems)
             {
+                var ticket = item.Ticket;
                 <tr>
-                    <td>@item.Title</td>
-                    <td>@item.Price</td>
-                    <td>@item.ValidityDate.ToShortDateString()</td>
-                    <td>@item.Genre</td>
+                    <td>@ticket.Title</td>
+                    <td>@ticket.Price</td>
+                    <td>@ticket.ValidityDate.ToShortDateString()</td>
+                    <td>@ticket.Genre</td>
                     <td>
                         <form asp-page-handler="RemoveFromCart" method="post">
-                            <input type="hidden" name="ticketId" value="@item.Id" />
+                            <input type="hidden" name="shoppingCartItemId" value="@item.ShoppingCartItemId" />
                             <button type="submit" class="btn btn-danger">Remove</button>
                         </form>
                     </td>
@@ -39,6 +40,7 @@
 
     <a asp-page="/Checkout" class="btn btn-primary">Proceed to Checkout</a>
 }
+
 else
 {
     <p>Your cart is empty.</p>

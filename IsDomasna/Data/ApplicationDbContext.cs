@@ -15,14 +15,39 @@ namespace IsDomasna.Data
         }
 
         public virtual DbSet<Ticket> Tickets { get; set; } // Add DbSet for Ticket model
+        public virtual DbSet<ShoppingCart> Carts { get; set; }
+        public virtual DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            //// Configure the Ticket entity
-            modelBuilder.Entity<Ticket>()
-                .ToTable("Tickets"); // Update table name if needed
+            ////// Configure the Ticket entity
+            //modelBuilder.Entity<Ticket>()
+            //    .ToTable("Tickets"); // Update table name if needed
+
+            modelBuilder.Entity<CinemaUser>()
+                .HasOne(u => u.ShoppingCart)
+                .WithOne(c => c.Owner)
+                .HasForeignKey<ShoppingCart>(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ShoppingCartItem>()
+                .HasKey(i => new { i.ShoppingCartItemId, i.ShoppingCartId, i.TicketId });
+
+            modelBuilder.Entity<ShoppingCartItem>()
+                .HasOne(i => i.ShoppingCart)
+                .WithMany(c => c.ShoppingCartItems)
+                .HasForeignKey(i => i.ShoppingCartId);
+
+            modelBuilder.Entity<ShoppingCartItem>()
+                .HasOne(i => i.Ticket)
+                .WithMany(t => t.ShoppingCartItems)
+                .HasForeignKey(i => i.TicketId);
+
+
         }
     }
+
 }

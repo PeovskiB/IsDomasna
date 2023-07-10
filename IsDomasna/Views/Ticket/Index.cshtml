@@ -47,8 +47,8 @@
                 <td>@ticket.ValidityDate.ToShortDateString()</td>
                 <td>@ticket.Genre</td>
                 <td>
-                    <a href="@Url.Action("Edit", new { id = ticket.Id })" class="btn btn-primary">Edit</a>
-                    <a href="@Url.Action("Delete", new { id = ticket.Id })" class="btn btn-danger">Delete</a>
+                    <a href="@Url.Action("Edit", new { id = ticket.TicketId })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Delete", new { id = ticket.TicketId })" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }

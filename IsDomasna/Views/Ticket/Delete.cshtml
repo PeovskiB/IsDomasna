@@ -21,7 +21,7 @@
 
 @using (Html.BeginForm("Delete", "Ticket", FormMethod.Post))
 {
-    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.TicketId)
     <button type="submit" class="btn btn-danger">Delete</button>
 }
 

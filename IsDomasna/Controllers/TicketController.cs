@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using OfficeOpenXml;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace YourAppName.Controllers
 {
@@ -78,7 +79,7 @@ namespace YourAppName.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Ticket ticket)
         {
-            if (id != ticket.Id)
+            if (id != ticket.TicketId)
             {
                 return NotFound();
             }
@@ -180,17 +181,59 @@ namespace YourAppName.Controllers
                 return NotFound();
             }
 
-            var user = await _userManager.GetUserAsync(User);
+            var user = await _userManager.Users
+                .Include(u => u.ShoppingCart)
+                    .ThenInclude(sc => sc.ShoppingCartItems)
+                .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+
             if (user == null)
             {
                 return Unauthorized();
             }
 
-            user.ShoppingCart.Tickets.Add(ticket);
+            var shoppingCartItem = new ShoppingCartItem
+            {
+                TicketId = ticket.TicketId,
+                ShoppingCartId = user.ShoppingCart.CartId
+            };
+
+            user.ShoppingCart.ShoppingCartItems.Add(shoppingCartItem);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Cart");
         }
+
+        // GET: /Cart
+        [Authorize]
+        public IActionResult Cart(DateTime? validityDate)
+        {
+            var cart = GetShoppingCart();
+
+            var tickets = cart.ShoppingCartItems
+                .Select(item => item.Ticket)
+                .AsQueryable();
+
+            // Apply the validity date filter if provided
+            if (validityDate.HasValue)
+            {
+                tickets = tickets.Where(t => t.ValidityDate.Date == validityDate.Value.Date);
+            }
+
+            return View(tickets.ToList());
+        }
+
+        private ShoppingCart GetShoppingCart()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.Users
+                .Include(u => u.ShoppingCart)
+                .ThenInclude(cart => cart.ShoppingCartItems)
+                .ThenInclude(item => item.Ticket)
+                .FirstOrDefault(u => u.Id == userId);
+
+            return user?.ShoppingCart;
+        }
+
 
 
     }

@@ -5,7 +5,8 @@ namespace IsDomasna.Models
 {
     public class Ticket
     {
-        public int Id { get; set; }
+        [Key]
+        public int TicketId { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -19,6 +20,8 @@ namespace IsDomasna.Models
         public DateTime ValidityDate { get; set; }
 
         public string? Genre { get; set; }
+
+        public virtual ICollection<ShoppingCartItem> ShoppingCartItems { get; set; } = new List<ShoppingCartItem>();
     }
 
 }

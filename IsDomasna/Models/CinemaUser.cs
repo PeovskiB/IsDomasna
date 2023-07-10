@@ -14,7 +14,7 @@ namespace IsDomasna.Models
 
         public string? Role { get; set; }
 
-        public int CartId { get; set; }
+        public int? CartId { get; set; }
         public ShoppingCart ShoppingCart { get; set; } = new ShoppingCart();
 
     }

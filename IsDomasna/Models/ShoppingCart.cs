@@ -1,17 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.ComponentModel.DataAnnotations;
 
 namespace IsDomasna.Models
 {
     public class ShoppingCart
-
     {
         [Key]
         public int CartId { get; set; }
 
-        public string? OwnerId { get; set; }
+        public string? UserId { get; set; }
 
-        public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+        public CinemaUser Owner { get; set; }
 
+        public virtual ICollection<ShoppingCartItem> ShoppingCartItems { get; set; } = new List<ShoppingCartItem>();
     }
-
 }
+
+

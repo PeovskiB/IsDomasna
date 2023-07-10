@@ -4,7 +4,7 @@
 
 @using (Html.BeginForm("Edit", "Ticket", FormMethod.Post))
 {
-    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.TicketId)
 
     <div class="form-group">
         @Html.LabelFor(model => model.Title)

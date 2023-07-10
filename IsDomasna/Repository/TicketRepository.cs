@@ -20,9 +20,9 @@ namespace IsDomasna.Repository
             // Initialize placeholder tickets
             Tickets.AddRange(new[]
             {
-            new Ticket { Id = 1, Title = "Ticket 1", Price = 10.99m, ValidityDate = new DateTime(2023, 7, 1) },
-            new Ticket { Id = 2, Title = "Ticket 2", Price = 15.99m, ValidityDate = new DateTime(2023, 7, 2) },
-            new Ticket { Id = 3, Title = "Ticket 3", Price = 12.99m, ValidityDate = new DateTime(2023, 7, 3) },
+            new Ticket { TicketId = 1, Title = "Ticket 1", Price = 10.99m, ValidityDate = new DateTime(2023, 7, 1) },
+            new Ticket { TicketId = 2, Title = "Ticket 2", Price = 15.99m, ValidityDate = new DateTime(2023, 7, 2) },
+            new Ticket { TicketId = 3, Title = "Ticket 3", Price = 12.99m, ValidityDate = new DateTime(2023, 7, 3) },
             // Add more placeholder tickets as needed
         
             });
@@ -35,7 +35,7 @@ namespace IsDomasna.Repository
 
         public Ticket GetTicketById(int id)
         {
-            return Tickets.FirstOrDefault(t => t.Id == id);
+            return Tickets.FirstOrDefault(t => t.TicketId == id);
         }
 
         public void AddTicket(Ticket ticket)
@@ -45,7 +45,7 @@ namespace IsDomasna.Repository
 
         public void UpdateTicket(Ticket ticket)
         {
-            var existingTicket = Tickets.FirstOrDefault(t => t.Id == ticket.Id);
+            var existingTicket = Tickets.FirstOrDefault(t => t.TicketId == ticket.TicketId);
             if (existingTicket != null)
             {
                 existingTicket.Title = ticket.Title;
@@ -56,7 +56,7 @@ namespace IsDomasna.Repository
 
         public void DeleteTicket(int id)
         {
-            var ticket = Tickets.FirstOrDefault(t => t.Id == id);
+            var ticket = Tickets.FirstOrDefault(t => t.TicketId == id);
             if (ticket != null)
             {
                 Tickets.Remove(ticket);
