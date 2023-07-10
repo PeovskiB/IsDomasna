@@ -141,7 +141,6 @@ namespace LabIS.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> ChangePermissions(UserPermissionsDto model)
         {
             if (ModelState.IsValid)
@@ -169,23 +168,39 @@ namespace LabIS.Controllers
                 }
             }
 
-            return View(model);
-        }
-
-        [HttpGet]
-        //[Authorize(Roles = "Admin")]
-        public IActionResult ManagePermissions()
-        {
+            // The following code will be used if the ModelState is not valid or currentRoleName != model.CurrentRole
             var users = userManager.Users.ToList();
-            var model = users.Select(user => new CinemaUser
+            var returnModel = users.Select(user => new CinemaUser
             {
                 Id = user.Id,
                 UserName = user.UserName,
                 Role = userManager.GetRolesAsync(user).Result.FirstOrDefault()
             }).ToList();
 
+            return View(returnModel);
+        }
+
+
+        [HttpGet]
+        public IActionResult ManagePermissions()
+        {
+            var users = userManager.Users.ToList();
+            var model = users.Select(user =>
+            {
+                var roles = userManager.GetRolesAsync(user).Result;
+                var role = roles.Any() ? roles.First() : string.Empty;
+
+                return new CinemaUser
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Role = role
+                };
+            }).ToList();
+
             return View(model);
         }
+
 
 
 
