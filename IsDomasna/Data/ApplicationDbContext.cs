@@ -4,6 +4,7 @@ using System.Reflection.Emit;
 using Microsoft.EntityFrameworkCore;
 using IsDomasna.Models; // Update with the appropriate namespace for your models
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace IsDomasna.Data
 {

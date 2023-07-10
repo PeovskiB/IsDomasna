@@ -1,0 +1,42 @@
+﻿@model List<CinemaUser>
+
+<h1>Manage User Permissions</h1>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Current Role</th>
+                <th>New Role</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Role</td>
+                    <td>
+                        <form asp-action="ChangePermissions">
+                            <input type="hidden" name="UserId" value="@user.Id" />
+                            <select name="NewRole" class="form-control">
+                                <option value="Admin">Admin</option>
+                                <option value="User">User</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Change Role</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No users available.</p>
+}

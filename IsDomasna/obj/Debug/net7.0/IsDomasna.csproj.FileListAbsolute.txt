@@ -174,3 +174,5 @@ C:\Users\Borjan\Documents\GitHub\IsDomasna\IsDomasna\bin\Debug\net7.0\System.Sec
 C:\Users\Borjan\Documents\GitHub\IsDomasna\IsDomasna\bin\Debug\net7.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Borjan\Documents\GitHub\IsDomasna\IsDomasna\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\Borjan\Documents\GitHub\IsDomasna\IsDomasna\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Borjan\Documents\GitHub\IsDomasna\IsDomasna\bin\Debug\net7.0\BouncyCastle.Crypto.dll
+C:\Users\Borjan\Documents\GitHub\IsDomasna\IsDomasna\bin\Debug\net7.0\itextsharp.dll

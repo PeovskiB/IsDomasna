@@ -118,31 +118,75 @@ namespace LabIS.Controllers
             return Redirect("https://localhost:7118/Identity/Account/Login");
         }
 
-        //public async Task<IActionResult> ChangeUserRole()
-        //{
-        //    AddToRoleModel model = new AddToRoleModel();
-        //    model.Roles = new List<string> { "Administrator", "Normal" };
-        //    return View(model);
-        //}
 
+        [HttpGet]
+        //[Authorize(Roles = "Admin")]
+        public IActionResult ChangePermissions(string userId)
+        {
+            var user = userManager.Users.FirstOrDefault(u => u.Id == userId);
 
-        //[HttpPost]
-        //public async Task<IActionResult> ChangeUserRole(AddToRoleModel model)
-        //{
-        //    var email = model.Email;
-        //    var user = await userManager.FindByEmailAsync(email);
-        //    if (user == null)
-        //    {
-        //        throw new HttpRequestException();
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-        //    }
+            var model = new UserPermissionsDto
+            {
+                UserId = userId,
+                UserName = user.UserName,
+                CurrentRole = userManager.GetRolesAsync(user).Result.FirstOrDefault()
+            };
 
-        //    await userManager.AddToRoleAsync(user, model.SelectedRole);
+            return View(model);
+        }
 
-        //    return Redirect("/");
+        [HttpPost]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ChangePermissions(UserPermissionsDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByIdAsync(model.UserId);
 
+                if (user == null)
+                {
+                    return NotFound();
+                }
 
-        //}
+                var currentRole = await userManager.GetRolesAsync(user);
+                var currentRoleName = currentRole.FirstOrDefault();
+
+                if (currentRoleName == model.CurrentRole)
+                {
+                    await userManager.RemoveFromRoleAsync(user, currentRoleName);
+                    await userManager.AddToRoleAsync(user, model.NewRole);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("message", "The current role selected is incorrect.");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        //[Authorize(Roles = "Admin")]
+        public IActionResult ManagePermissions()
+        {
+            var users = userManager.Users.ToList();
+            var model = users.Select(user => new CinemaUser
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Role = userManager.GetRolesAsync(user).Result.FirstOrDefault()
+            }).ToList();
+
+            return View(model);
+        }
+
 
 
 
@@ -150,3 +194,5 @@ namespace LabIS.Controllers
 
 
 }
+
+

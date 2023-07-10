@@ -11,6 +11,7 @@
                 <th>User ID</th>
                 <th>Order Date</th>
                 <th>Order Items</th>
+                <th></th> <!-- Add a new column for the PDF report button -->
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,11 @@
                                 <li>@item.Ticket.Title</li>
                             }
                         </ul>
+                    </td>
+                    <td>
+                        <form method="post" action="@Url.Action("GenerateReport", "Order", new { orderId = order.OrderId })">
+                            <button type="submit" class="btn btn-primary">Generate Report</button>
+                        </form>
                     </td>
                 </tr>
             }
